@@ -199,14 +199,19 @@ func DeploymentReady(ctx context.Context, kubeCli kubernetes.Interface, namespac
 		)
 	}
 	if status != "" {
+		fmt.Println("#in status")
 		return false, status, nil
 	}
+	fmt.Println("#After status")
 	rs, err := FetchReplicaSet(kubeCli, namespace, d.GetUID(), d.Annotations[RevisionAnnotation])
 	if err != nil {
 		return false, "", err
 	}
+	fmt.Println("#After getting replicaset ")
 	runningPods, notRunningPods, err := FetchPods(kubeCli, namespace, rs.GetUID())
 	if err != nil {
+		fmt.Println("### running non running pods")
+		fmt.Println(err)
 		return false, "", err
 	}
 	// The deploymentComplete check above already validates this but we do it
@@ -263,9 +268,12 @@ func WaitOnDeploymentReady(ctx context.Context, kubeCli kubernetes.Interface, na
 		if s != "" {
 			status = s
 		}
+		fmt.Println("#after deployment ready ", err)
 		if apierrors.IsNotFound(errors.Cause(err)) {
 			return false, nil
 		}
+		fmt.Println("#after is not found err", err)
+		fmt.Println("ok: ", ok)
 		return ok, err
 	})
 	if err != nil && status != "" {
