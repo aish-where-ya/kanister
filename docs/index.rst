@@ -22,6 +22,7 @@ homogeneous operational experience across applications at scale.
    overview
    usage
    architecture
+   tasks
    tooling
    helm
    functions
