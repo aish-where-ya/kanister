@@ -11,7 +11,7 @@ replace (
 
 // Direct and indirect dependencies are grouped together
 require (
-	github.com/Azure/azure-sdk-for-go v64.0.0+incompatible
+	github.com/Azure/azure-sdk-for-go v65.0.0+incompatible
 	github.com/Azure/go-autorest/autorest v0.11.27
 	github.com/Azure/go-autorest/autorest/azure/auth v0.5.11
 	github.com/Azure/go-autorest/autorest/to v0.4.0
@@ -19,15 +19,15 @@ require (
 	github.com/IBM/ibmcloud-storage-volume-lib v1.0.2-beta02.0.20190828145158-1da4543a60af
 	github.com/Masterminds/semver v1.5.0
 	github.com/Masterminds/sprig v2.22.0+incompatible
-	github.com/aws/aws-sdk-go v1.44.22
+	github.com/aws/aws-sdk-go v1.44.32
 	github.com/ghodss/yaml v1.0.1-0.20190212211648-25d852aebe32
-	github.com/go-openapi/strfmt v0.19.3
+	github.com/go-openapi/strfmt v0.21.2
 	github.com/go-sql-driver/mysql v1.6.0
 	github.com/gofrs/uuid v4.2.0+incompatible
 	github.com/golang/mock v1.6.0
 	github.com/google/uuid v1.3.0
 	github.com/graymeta/stow v0.0.0-00010101000000-000000000000
-	github.com/hashicorp/go-version v1.4.0
+	github.com/hashicorp/go-version v1.5.0
 	github.com/jpillora/backoff v1.0.0
 	github.com/json-iterator/go v1.1.12
 	github.com/kopia/kopia v0.10.7-0.20220330221649-08cf7eb936c6
@@ -40,10 +40,10 @@ require (
 	github.com/openshift/api v0.0.0-20200526144822-34f54f12813a
 	github.com/openshift/client-go v0.0.0-20200521150516-05eb9880269c
 	github.com/pkg/errors v0.9.1
-	github.com/prometheus/client_golang v1.12.1
+	github.com/prometheus/client_golang v1.12.2
 	github.com/sirupsen/logrus v1.8.1
 	github.com/spf13/cobra v1.4.0
-	github.com/vmware/govmomi v0.27.4
+	github.com/vmware/govmomi v0.28.0
 	go.uber.org/zap v1.21.0
 	golang.org/x/oauth2 v0.0.0-20220411215720-9780585627b5
 	google.golang.org/api v0.80.0
@@ -99,7 +99,7 @@ require (
 	github.com/fsnotify/fsnotify v1.5.1 // indirect
 	github.com/go-errors/errors v1.0.1 // indirect
 	github.com/go-logr/logr v1.2.0 // indirect
-	github.com/go-openapi/errors v0.19.2 // indirect
+	github.com/go-openapi/errors v0.19.8 // indirect
 	github.com/go-openapi/jsonpointer v0.19.5 // indirect
 	github.com/go-openapi/jsonreference v0.19.5 // indirect
 	github.com/go-openapi/swag v0.19.14 // indirect
@@ -126,7 +126,6 @@ require (
 	github.com/klauspost/compress v1.15.1 // indirect
 	github.com/klauspost/cpuid/v2 v2.0.12 // indirect
 	github.com/klauspost/pgzip v1.2.5 // indirect
-	github.com/kr/pretty v0.3.0 // indirect
 	github.com/liggitt/tabwriter v0.0.0-20181228230101-89fcab3d43de // indirect
 	github.com/mailru/easyjson v0.7.7 // indirect
 	github.com/matttproud/golang_protobuf_extensions v1.0.2-0.20181231171920-c182affec369 // indirect
@@ -144,6 +143,7 @@ require (
 	github.com/monochromegane/go-gitignore v0.0.0-20200626010858-205db1a8cc00 // indirect
 	github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 // indirect
 	github.com/natefinch/atomic v1.0.1 // indirect
+	github.com/oklog/ulid v1.3.1 // indirect
 	github.com/peterbourgon/diskv v2.0.1+incompatible // indirect
 	github.com/pierrec/lz4 v2.6.1+incompatible // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
@@ -151,6 +151,7 @@ require (
 	github.com/prometheus/common v0.33.0 // indirect
 	github.com/prometheus/procfs v0.7.3 // indirect
 	github.com/renier/xmlrpc v0.0.0-20170708154548-ce4a1a486c03 // indirect
+	github.com/rogpeppe/go-internal v1.6.1 // indirect
 	github.com/rs/xid v1.4.0 // indirect
 	github.com/russross/blackfriday v1.5.2 // indirect
 	github.com/softlayer/softlayer-go v0.0.0-20190615201252-ba6e7f295217 // indirect
@@ -158,7 +159,7 @@ require (
 	github.com/stretchr/testify v1.7.1 // indirect
 	github.com/xlab/treeprint v0.0.0-20181112141820-a009c3971eca // indirect
 	github.com/zeebo/blake3 v0.2.3 // indirect
-	go.mongodb.org/mongo-driver v1.5.1 // indirect
+	go.mongodb.org/mongo-driver v1.7.5 // indirect
 	go.opencensus.io v0.23.0 // indirect
 	go.starlark.net v0.0.0-20200306205701-8dd3e2ee1dd5 // indirect
 	go.uber.org/atomic v1.9.0 // indirect

@@ -10,7 +10,7 @@ This chart bootstraps a single node MySQL deployment on a [Kubernetes](http://ku
 
 - Kubernetes 1.16+ with Beta APIs enabled
 - PV provisioner support in the underlying infrastructure
-- Kanister controller version 0.79.0 installed in your cluster, let's assume in Namespace `kanister`
+- Kanister controller version 0.80.0 installed in your cluster, let's assume in Namespace `kanister`
 - Kanctl CLI installed (https://docs.kanister.io/tooling.html#install-the-tools)
 
 ## Installing the Chart
@@ -121,7 +121,7 @@ s3-profile-drnw9   2m
 
 # Create Actionset
 # Please make sure the value of profile and blueprint matches with the names of profile and blueprint that we have created already
-$ kanctl create actionset --action backup --namespace kanister --blueprint mysql-blueprint --statefulset mysql-test/mysql-release-master --profile mysql-test/s3-profile-drnw9 --secrets mysql=mysql-test/mysql-release
+$ kanctl create actionset --action backup --namespace kanister --blueprint mysql-blueprint --statefulset mysql-test/mysql-release --profile mysql-test/s3-profile-drnw9 --secrets mysql=mysql-test/mysql-release
 actionset backup-rslmb created
 
 $ kubectl --namespace kanister get actionsets.cr.kanister.io
