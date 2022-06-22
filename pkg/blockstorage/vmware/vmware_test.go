@@ -2,16 +2,20 @@ package vmware
 
 import (
 	"context"
-	"errors"
 	"fmt"
 	"os"
 	"sort"
 	"testing"
 	"time"
 
-	"github.com/kanisterio/kanister/pkg/blockstorage"
+	"github.com/pkg/errors"
 	vapitags "github.com/vmware/govmomi/vapi/tags"
+	"github.com/vmware/govmomi/vim25/soap"
+	"github.com/vmware/govmomi/vim25/types"
+	vslmtypes "github.com/vmware/govmomi/vslm/types"
 	. "gopkg.in/check.v1"
+
+	"github.com/kanisterio/kanister/pkg/blockstorage"
 )
 
 func Test(t *testing.T) { TestingT(t) }
@@ -390,6 +394,52 @@ func (s *VMWareSuite) TestGetSnapshotTags(c *C) {
 			c.Assert(len(tags), Equals, tc.expNumTags)
 		}
 	}
+}
+
+func (s *VMWareSuite) TestFormatGovmomiError(c *C) {
+	// basic soap fault
+	fault := &soap.Fault{
+		Code:   "soap-fault",
+		String: "fault string",
+	}
+	soapFaultErr := soap.WrapSoapFault(fault)
+	c.Assert(formatGovmomiError(soapFaultErr), Equals, "soap-fault: fault string")
+	c.Assert(formatGovmomiError(errors.Wrap(soapFaultErr, "outer wrapper")), Equals, "outer wrapper: soap-fault: fault string")
+
+	// soap fault with detail
+	vslmFault := &vslmtypes.VslmSyncFaultFault{
+		VslmFault: vslmtypes.VslmFault{
+			MethodFault: types.MethodFault{
+				FaultMessage: []types.LocalizableMessage{
+					{
+						Key: "com.vmware.pbm.pbmFault.locale",
+						Arg: []types.KeyAnyValue{
+							{
+								Key:   "summary",
+								Value: "(vmodl.fault.SystemError) {\n   faultCause = null,\n   faultMessage = null,\n   reason = Change tracking invalid or disk in use: api = DiskLib_BlockTrackGetEpoch, path-\u003eCValue() = /vmfs/volumes/vsan:52731cd109496ced-173f8e8aec7c6828/dc6d0c61-ec84-381f-2fa3-000c29e75b7f/4e1e7c4619a34919ae1f28fbb53fcd70-000001.vmdk\n}",
+							},
+						},
+						Message: "localized message",
+					},
+				},
+			},
+			Msg: "vslm fault message",
+		},
+		Id: &types.ID{Id: "vslm-sync-fault-id"},
+	}
+	c.Assert(vslmFault.GetMethodFault(), NotNil)
+	c.Assert(vslmFault.GetMethodFault().FaultMessage, DeepEquals, vslmFault.FaultMessage)
+	fault.Detail.Fault = vslmFault
+	vslmFaultErr := soap.WrapSoapFault(fault)
+	c.Assert(formatGovmomiError(vslmFaultErr), Equals, "localized message (com.vmware.pbm.pbmFault.locale); soap-fault: fault string")
+	c.Assert(formatGovmomiError(errors.Wrap(vslmFaultErr, "outer wrapper")), Equals, "localized message (com.vmware.pbm.pbmFault.locale); outer wrapper: soap-fault: fault string")
+
+	// normal error
+	testError := errors.New("test-error")
+	c.Assert(formatGovmomiError(testError), Equals, testError.Error())
+
+	// nil
+	c.Assert(formatGovmomiError(nil), Equals, "")
 }
 
 type fakeTagManager struct {
